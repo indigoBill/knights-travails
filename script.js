@@ -35,9 +35,7 @@ function knightMoves(start, end){
 
     function createAdjacencyList(startPosition, parent = null){
         const startNode = new Node(startPosition);
-        const maxPossibleMoves = 8;
         const possibleMovesArr = [];
-        let currPossibleMove = 1;
         let xCoor;
         let yCoor;
 
@@ -45,48 +43,21 @@ function knightMoves(start, end){
 
         startNode.parent = parent;
 
-        while(currPossibleMove <= maxPossibleMoves){
-            switch(currPossibleMove) {
-                case 1:
-                    xCoor = startPosition[0] + 1;
-                    yCoor = startPosition[1] + 2;
-                    break;
-                case 2:
-                    xCoor = startPosition[0] - 1;
-                    yCoor = startPosition[1] + 2;
-                    break;
-                case 3:
-                    xCoor = startPosition[0] - 2;
-                    yCoor = startPosition[1] + 1;
-                    break;
-                case 4:
-                    xCoor = startPosition[0] + 2;
-                    yCoor = startPosition[1] + 1;
-                    break;
-                case 5:
-                    xCoor = startPosition[0] - 1;
-                    yCoor = startPosition[1] - 2;
-                    break;
-                case 6:
-                    xCoor = startPosition[0] + 1;
-                    yCoor = startPosition[1] - 2;
-                    break;
-                case 7:
-                    xCoor = startPosition[0] - 2;
-                    yCoor = startPosition[1] - 1;
-                    break;
-                case 8:
-                    xCoor = startPosition[0] + 2;
-                    yCoor = startPosition[1] - 1;
-                    break;
-            }
+        const knightOffset = [[1,2],[-1,2],[-2,1],[2,1],[-1,-2],[1,-2],[-2,-1],[2,-1]];
+
+        function getPossibleMoves(arr){
+            xCoor = startPosition[0] + arr[0];
+            yCoor = startPosition[1] + arr[1];
 
             const finalCoor = createNodeFromCoordinates(xCoor, yCoor, startNode);
 
-            if(finalCoor) possibleMovesArr.push(finalCoor);
-
-            currPossibleMove++;
+            if(finalCoor) return finalCoor;
         }
+
+        knightOffset.map(getPossibleMoves).forEach((ele) => {
+            if(ele) possibleMovesArr.push(ele);
+        })
+
         return possibleMovesArr;
     }
 
@@ -151,3 +122,5 @@ function knightMoves(start, end){
         displayError();
     }
 }
+
+knightMoves([0,0],[3,3])
