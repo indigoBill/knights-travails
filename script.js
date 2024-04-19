@@ -43,7 +43,7 @@ function knightMoves(start, end){
 
         startNode.parent = parent;
 
-        const knightOffset = [[1,2],[-1,2],[-2,1],[2,1],[-1,-2],[1,-2],[-2,-1],[2,-1]];
+        const POSSIBLE_PLAYS = [[1,2],[-1,2],[-2,1],[2,1],[-1,-2],[1,-2],[-2,-1],[2,-1]];
 
         function getPossibleMoves(arr){
             xCoor = startPosition[0] + arr[0];
@@ -54,9 +54,9 @@ function knightMoves(start, end){
             if(finalCoor) return finalCoor;
         }
 
-        knightOffset.map(getPossibleMoves).forEach((ele) => {
+        POSSIBLE_PLAYS.map(getPossibleMoves).forEach((ele) => {
             if(ele) possibleMovesArr.push(ele);
-        })
+        });
 
         return possibleMovesArr;
     }
@@ -122,5 +122,3 @@ function knightMoves(start, end){
         displayError();
     }
 }
-
-knightMoves([0,0],[3,3])
