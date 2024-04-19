@@ -142,7 +142,7 @@ function knightMoves(start, end){
         const shortestPath = buildShortestPath(node);
 
         console.log(`YOU MADE IT IN ${shortestPath.length - 1} MOVES! HERE'S YOUR PATH:`);
-        
+
         shortestPath.forEach((move) => {
             console.log(move);
         });
@@ -151,5 +151,3 @@ function knightMoves(start, end){
         displayError();
     }
 }
-
-knightMoves([0,5],[3,6]);
